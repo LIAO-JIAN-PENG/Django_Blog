@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Post Page</title>
+        <title>We Blog</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
-
+    <h1><a href="{% url 'post_list' %}"></a></h1>
     <body>
         {% block content %}
             replace content
