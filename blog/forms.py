@@ -2,6 +2,7 @@ from django.forms.widgets import Widget
 from .models import Post, Profile
 from django import forms
 
+
 # form for post
 class PostForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))

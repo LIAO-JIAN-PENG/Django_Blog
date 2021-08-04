@@ -6,6 +6,7 @@ from django.urls import reverse
 # status for post
 STATUS = ((0, "Draft"), (1, "Publish"))
 
+
 # model for profile
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
