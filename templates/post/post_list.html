@@ -2,11 +2,16 @@
 
 {% block content %}
     {% for post in post_list %}
-        <div>
-            <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <br>
+        <h2 class="panel-title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <small>
             <a href="{% url 'profile_detail' post.author.id %}">{{ post.author }}</a>
-            <p>{{ post.created_date }} likes: {{ post.likes }}</p>
-            <p>{{ post.content }}</p>
-        </div>
+        </small>
+        {% if user.id == post.author.id %}
+            <h1>my post</h1>
+        {% endif %}
+        <p>created: {{ post.created_date }}</p>
+        <p>likes: {{ post.likes }}</p>
+        <p>{{ post.content }}</p>
     {% endfor %}
 {% endblock %}

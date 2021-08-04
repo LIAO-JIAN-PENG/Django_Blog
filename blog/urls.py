@@ -1,10 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (
     PostCreateView,
     PostDetailView,
     PostListView,
     ProfileUpdateView,
     ProfileDetailView,
+    MemberRegisterView,
 )
 
 urlpatterns = [
@@ -17,4 +18,7 @@ urlpatterns = [
     path(
         "profile/<int:pk>/update/", ProfileUpdateView.as_view(), name="profile_update"
     ),
+    # urls for memeber
+    path("member/register/", MemberRegisterView.as_view(), name="register"),
+    path("member/", include("django.contrib.auth.urls"), name="login"),
 ]

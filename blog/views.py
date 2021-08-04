@@ -1,6 +1,8 @@
 from .forms import PostForm, ProfileForm
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
 from .models import Profile, Post
 
 
@@ -14,7 +16,6 @@ class PostCreateView(CreateView):
     template_name = "post/post_create.html"
     form_class = PostForm
     queryset = Post.objects.all()
-    # success_url = "../"
 
     # check if the form is valid
     def form_valid(self, form):
@@ -40,3 +41,10 @@ class ProfileUpdateView(UpdateView):
     # check if the form is valid
     def form_invalid(self, form):
         return super().form_invalid(form)
+
+
+# views for member
+class MemberRegisterView(CreateView):
+    form_class = UserCreationForm
+    template_name = "registration/register.html"
+    success_url = reverse_lazy("login")

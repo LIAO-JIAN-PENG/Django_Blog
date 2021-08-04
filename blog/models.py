@@ -46,3 +46,6 @@ class Post(models.Model):
     # return to detail page
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"slug": self.slug})
+
+
+# model for member
