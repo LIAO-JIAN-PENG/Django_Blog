@@ -5,6 +5,10 @@
 {% block content %}
     <br>
     <h1>Edit Profile</h1>
+    <br>
+    {{ user.profile.bio }}
+    <br>
+    <br>
     <form method="POST"> 
         {% csrf_token %}
         <!-- display as <p> -->

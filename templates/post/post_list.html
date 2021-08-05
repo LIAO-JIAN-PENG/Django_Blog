@@ -9,7 +9,7 @@
             <h1><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h1>
             <p class="text-muted"> 
                 <small>
-                    <a href="{% url 'profile_detail' post.author.id %}">{{ post.author }}</a>
+                    <a href="#">{{ post.author }}</a>
                 </small> 
                 <small style="margin-left: 2cm">{{ post.created_date }}</small>
                 <small style="margin-left: 2cm">likes: {{ post.likes }}</small>
