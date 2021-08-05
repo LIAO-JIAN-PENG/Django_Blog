@@ -1,24 +1,11 @@
 from django.urls import path, include
-from .views import (
-    PostCreateView,
-    PostDetailView,
-    PostListView,
-    ProfileUpdateView,
-    ProfileDetailView,
-    MemberRegisterView,
-)
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    # home page
+    path("", RedirectView.as_view(url="post/"), name="home"),
     # urls for post
-    path("", PostListView.as_view(), name="post_list"),
-    path("create/", PostCreateView.as_view(), name="post_create"),
-    path("<slug:slug>/", PostDetailView.as_view(), name="post_detail"),
-    # urls for profile
-    path("profile/<int:pk>/", ProfileDetailView.as_view(), name="profile_detail"),
-    path(
-        "profile/<int:pk>/update/", ProfileUpdateView.as_view(), name="profile_update"
-    ),
+    path("post/", include("post.urls"), name="post"),
     # urls for memeber
-    path("member/register/", MemberRegisterView.as_view(), name="register"),
-    path("member/", include("django.contrib.auth.urls"), name="login"),
+    path("account/", include("registration.urls"), name="account"),
 ]

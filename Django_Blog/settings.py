@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # own
     "blog",
+    "post",
+    "registration",
 ]
 
 MIDDLEWARE = [
@@ -52,7 +54,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "django_blog.urls"
+ROOT_URLCONF = "Django_Blog.urls"
 
 TEMPLATES = [
     {
@@ -70,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django_blog.wsgi.application"
+WSGI_APPLICATION = "Django_Blog.wsgi.application"
 
 
 # Database
@@ -122,9 +124,9 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-LOGIN_REDIRECT_URL = "../../"
+LOGIN_REDIRECT_URL = "home"
 
-LOGOUT_REDIRECT_URL = "../../"
+LOGOUT_REDIRECT_URL = "home"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
