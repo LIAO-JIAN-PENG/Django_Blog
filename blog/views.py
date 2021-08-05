@@ -1,30 +1,7 @@
-from .forms import PostForm, ProfileForm
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from .models import Profile, Post
-
-
-# views for post
-class PostListView(ListView):
-    template_name = "post/post_list.html"
-    queryset = Post.objects.all()
-
-
-class PostCreateView(CreateView):
-    template_name = "post/post_create.html"
-    form_class = PostForm
-    queryset = Post.objects.all()
-
-    # check if the form is valid
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-
-class PostDetailView(DetailView):
-    template_name = "post/post_detail.html"
-    queryset = Post.objects.all()
+from django.views.generic import DetailView, UpdateView
+from .models import Profile
+from .forms import ProfileForm
 
 
 # views for profile
@@ -40,11 +17,6 @@ class ProfileUpdateView(UpdateView):
 
     # check if the form is valid
     def form_invalid(self, form):
+        # get the current user
+        form.instance.user = self.request.user
         return super().form_invalid(form)
-
-
-# views for member
-class MemberRegisterView(CreateView):
-    form_class = UserCreationForm
-    template_name = "registration/register.html"
-    success_url = reverse_lazy("login")
