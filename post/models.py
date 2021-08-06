@@ -11,7 +11,7 @@ STATUS = ((0, "Draft"), (1, "Publish"))
 # model for post
 class Post(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=400, unique=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
@@ -27,11 +27,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    # create slug for post
-    def save(self, *args, **kwargs):
-        self.slug = uuid.uuid4
-        super(Post, self).save(*args, **kwargs)
-
     # return to detail page
     def get_absolute_url(self):
-        return reverse("post_detail", args=[str(self.pk)])
+        # return reverse("post-detail", args=[str(self.pk)])
+        return reverse("post-detail", args=[str(self.pk)])

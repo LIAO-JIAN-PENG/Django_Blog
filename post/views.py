@@ -7,9 +7,9 @@ from .forms import PostForm
 
 
 def LikeView(request, pk):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post = get_object_or_404(Post, id=request.POST.get("post_id"))
     post.likes.add(request.user)
-    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+    return HttpResponseRedirect(reverse("post-detail", args=[str(pk)]))
 
 
 # views for post

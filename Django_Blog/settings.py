@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # own
     "blog",
     "post",
-    "registration",
+    "account",
 ]
 
 MIDDLEWARE = [

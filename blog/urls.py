@@ -7,5 +7,5 @@ urlpatterns = [
     # urls for post
     path("post/", include("post.urls"), name="post"),
     # urls for memeber
-    path("account/", include("registration.urls"), name="account"),
+    path("account/", include("account.urls"), name="account"),
 ]
