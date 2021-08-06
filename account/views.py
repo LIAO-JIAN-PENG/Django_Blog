@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DetailView
-from .forms import ChangePasswordForm, SignUpForm, EditProfileForm
-from django.urls import reverse_lazy
-from .models import Profile
 from django.contrib.auth.views import PasswordChangeView
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DetailView
+
+from .forms import ChangePasswordForm, SignUpForm, EditProfileForm
+from .models import Profile
+
 
 # views for member
 class UserRegisterView(CreateView):
