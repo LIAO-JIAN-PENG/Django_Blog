@@ -1,7 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Post
 from .forms import PostForm
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+
 
 # views for post
 class PostListView(ListView):

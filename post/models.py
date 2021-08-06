@@ -2,14 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+import uuid
 
 # status for post
 STATUS = ((0, "Draft"), (1, "Publish"))
 
+
 # model for post
 class Post(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=400, unique=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
@@ -17,7 +19,7 @@ class Post(models.Model):
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name="blog_likes")
 
     class Meta:
         ordering = ["-created_date"]
@@ -27,9 +29,9 @@ class Post(models.Model):
 
     # create slug for post
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = uuid.uuid4
         super(Post, self).save(*args, **kwargs)
 
     # return to detail page
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"slug": self.slug})
+        return reverse("post_detail", args=[str(self.pk)])
