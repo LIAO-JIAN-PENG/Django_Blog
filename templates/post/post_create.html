@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="form-group">
-    <form method="POST"> {% csrf_token %}
+    <form method="POST"> 
+        {% csrf_token %}
         <!-- display as <p> -->
         {{ form.as_p }}
         <button type="submit" class="btn btn-secondary">Create Post</button>

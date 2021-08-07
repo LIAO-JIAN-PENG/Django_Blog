@@ -23,13 +23,16 @@
 
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'user-profile' user.pk %}">{{ user.username }}</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'edit-profile' %}">Edit Profile</a>
-                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'account-setting' %}">Account Setting</a>
+                      <a class="dropdown-item" href="{% url 'edit-profile' user.profile.pk %}">Edit Profile</a>
+                      <a class="dropdown-item" href="{% url 'user-profile' user.profile.pk %}">Show Profile</a>
+                    </div>
+                  </li>
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>

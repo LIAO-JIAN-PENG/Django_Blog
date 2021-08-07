@@ -5,6 +5,7 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth.models import User
 from django import forms
+from .models import Profile
 
 #  form for registration
 class SignUpForm(UserCreationForm):
@@ -36,7 +37,7 @@ class SignUpForm(UserCreationForm):
 
 
 # form for editing profile
-class EditProfileForm(UserChangeForm):
+class AccountSettingForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
     first_name = forms.CharField(
         max_length=100, widget=forms.TextInput(attrs={"class": "form-control"})
@@ -82,7 +83,7 @@ class EditProfileForm(UserChangeForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
+        super(AccountSettingForm, self).__init__(*args, **kwargs)
         # disable some checkbox
         self.fields["is_superuser"].disabled = True
 
@@ -104,3 +105,13 @@ class ChangePasswordForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ["old_password", "new_password1", "new_password2"]
+
+
+class EditProfileForm(forms.ModelForm):
+    bio = forms.CharField(
+        required=False, widget=forms.Textarea(attrs={"class": "form-control"})
+    )
+
+    class Meta:
+        model = Profile
+        fields = ["bio"]
