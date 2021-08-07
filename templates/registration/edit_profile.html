@@ -3,16 +3,25 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-    <br>
-    <h1>Edit Profile</h1>
-    <br>
-    {{ user.profile.bio }}
-    <br>
-    <br>
-    <form method="POST"> 
-        {% csrf_token %}
-        <!-- display as <p> -->
-        {{ form.as_p }}
-        <input type="submit" value="Update Profile" />
-    </form>
+    {% if user.is_authenticated %}
+        {% if user.pk == profile.user.pk %}
+            <br>
+            <h1>Edit Profile</h1>
+            <br>
+            
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary">Update Profile</button>
+                </form>
+            </div>
+        {% else %}
+            <br>
+            <h1>This is not your profile!!!</h1>
+        {% endif %}
+    {% else %}
+        <br>
+        <h1>Please Login First To Edit Profile</h1>
+    {% endif %}
 {% endblock %}

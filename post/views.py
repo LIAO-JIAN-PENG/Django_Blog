@@ -15,7 +15,7 @@ def LikeView(request, pk):
     else:
         post.likes.add(request.user)
         liked = True
-    return render(reverse("post-detail", args=[str(pk)]))
+    return HttpResponseRedirect(reverse("post-detail", args=[str(pk)]))
 
 
 # views for post
@@ -43,11 +43,11 @@ class PostDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(PostDetailView, self).get_context_data()
 
-        stuff = get_object_or_404(Post, id=self.kwargs.get("pk"))
-        total_likes = stuff.likes.all().count()
+        post = get_object_or_404(Post, id=self.kwargs["pk"])
+        total_likes = post.likes.all().count()
 
         liked = False
-        if stuff.likes.filter(id=self.request.user.id).exists():
+        if post.likes.filter(id=self.request.user.id).exists():
             liked = True
 
         context["total_likes"] = total_likes
