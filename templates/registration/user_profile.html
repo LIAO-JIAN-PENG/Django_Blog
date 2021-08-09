@@ -4,6 +4,15 @@
 
 {% block content %}
     <br>
-    <h1>User Profile</h1>
+    <h1>{{ profile.user }}</h1>
+    {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic.url }}" width="200">
+        <hr>
+        <br>
+    {% else %}
+        <img src="{{ default }}" width="200">
+        <hr>
+        <br>
+    {% endif %}
     {{ profile }}
 {% endblock %}

@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile")
 
     def __str__(self):
         return str(self.bio)

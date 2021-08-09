@@ -6,6 +6,8 @@ from django.contrib.auth.forms import (
 from django.contrib.auth.models import User
 from django import forms
 from .models import Profile
+from django.utils.translation import ugettext_lazy as _
+
 
 #  form for registration
 class SignUpForm(UserCreationForm):
@@ -111,7 +113,9 @@ class EditProfileForm(forms.ModelForm):
     bio = forms.CharField(
         required=False, widget=forms.Textarea(attrs={"class": "form-control"})
     )
+    profile_pic = forms.ImageField(label=_('profile_image'), required=False,
+                                   error_messages={'invalid': _("Image files only")})
 
     class Meta:
         model = Profile
-        fields = ["bio"]
+        fields = ["bio", "profile_pic"]

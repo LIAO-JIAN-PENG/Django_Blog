@@ -38,10 +38,14 @@ class UserProfileView(DetailView):
     model = Profile
     template_name = "registration/user_profile.html"
 
+
     def get_context_data(self, *args, **kwargs):
         context = super(UserProfileView, self).get_context_data(*args, **kwargs)
         profile = get_object_or_404(Profile, id=self.kwargs["pk"])
+        default_image = "/media/images/post/default.png"
         context["profile"] = profile
+        context["default"] = default_image
+
         return context
 
 

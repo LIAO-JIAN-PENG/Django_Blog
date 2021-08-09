@@ -5,21 +5,32 @@
 {% block content %}
     <div class="col-md-8 card mb-4  mt-3 left  top">
         <div class="card-body">
-        <h1>{{ post.title }}</h1>
-        <p class=" text-muted">{{ post.author }} | {{ post.created_date }}</p>
-        <p class="card-text ">{{ post.content | safe }}</p>
+            <h1>{{ post.title }}</h1>
+            <p class=" text-muted">{{ post.author }} | {{ post.created_date }}</p>
+            <p class="card-text ">{{ post.content | safe }}</p>
 
-        <hr>
-        <form action="{% url 'like-post' post.pk %}" method="POST">
-            {% csrf_token %}
+            <hr>
+            <form action="{% url 'like-post' post.pk %}" method="POST">
+                {% csrf_token %}
 
-            {% if liked %}
-                <button type="submit", name='post_id', value="{{ post.id }}", class="btn btn-danger btn-sm">Unlike</button>
-            {% else %}
-                <button type="submit", name='post_id', value="{{ post.id }}", class="btn btn-primary btn-sm">Like</button>
-            {% endif %}
+                {% if liked %}
+                    <button type="submit" , name='post_id' , value="{{ post.id }}" , class="btn btn-danger btn-sm">
+                        Unlike
+                    </button>
+                {% else %}
+                    <button type="submit" , name='post_id' , value="{{ post.id }}" , class="btn btn-primary btn-sm">
+                        Like
+                    </button>
+                {% endif %}
                 <span style="margin-left: 5px;">{{ total_likes }} Likes</span>
-        </form>
+            </form>
+            {% if post.image %}
+                <hr>
+                <br>
+                <img src="{{ post.image.url }}" width="400">
+            {% endif %}
         </div>
+
+
     </div>
 {% endblock %}
