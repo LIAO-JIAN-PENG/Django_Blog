@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 import uuid
+from ckeditor.fields import RichTextField
 
 # status for post
 STATUS = ((0, "Draft"), (1, "Publish"))
@@ -17,7 +18,7 @@ class Post(models.Model):
     )
     image = models.ImageField(null=True, blank=True, upload_to="images/post/")
     updated_date = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+    content = RichTextField(blank=False, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(User, related_name="blog_likes")
